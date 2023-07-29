@@ -255,33 +255,18 @@ func GetCode(c *gin.Context) {
 	}
 
 	fmt.Println("Repository cloned and checked out to specified commit.") // // 仓库 URL
-	// repoURL := "https://github.com/username/repository.git"
-	//
-	// // 克隆仓库到本地
-	// err := exec.Command("git", "clone", repoURL).Run()
-	// if err != nil {
-	// 	fmt.Println("Failed to clone repository:", err)
-	// 	os.Exit(1)
-	// }
-	//
-	// // 进入仓库目录
-	// err = os.Chdir("repository")
-	// if err != nil {
-	// 	fmt.Println("Failed to change directory:", err)
-	// 	os.Exit(1)
-	// }
-	//
-	// // 指定 commit 的哈希值
-	// commitHash := "abcdef1234567890"
-	//
-	// // 切换到指定的 commit
-	// err = exec.Command("git", "checkout", commitHash).Run()
-	// if err != nil {
-	// 	fmt.Println("Failed to checkout commit:", err)
-	// 	os.Exit(1)
-	// }
-	//
-	// fmt.Println("Successfully checked out commit", commitHash)
+
+	time.Sleep(5 * time.Second)
+
+	// 运行测试
+	fmt.Println("运行测试")
+	cmd = exec.Command("go", "test", "-bench", ".", "|", "tee", "benchmark_result.txt")
+	err = cmd.Run()
+	if err != nil {
+		panic(err)
+		return
+	}
+
 }
 func pushHandler(c *gin.Context) {
 	// 拉取 push 代码
