@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-playground/webhooks/v6/github"
@@ -92,18 +94,25 @@ func main() {
 	err = http.ListenAndServe(":80", nil)
 	if err != nil {
 		panic(err)
-		return
 	}
 }
 
 func runScript(scriptName string) (err error) {
 	script := "./scripts/" + scriptName
-	out, err := exec.Command("bash", "-c", script).Output()
-	if err != nil {
-		log.Printf("Exec command failed: %s\n", err)
-	}
+	log.Println("script:", script)
+	cmd := exec.Command("bash", "-c", script)
+	var out bytes.Buffer
+	var stderr bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &stderr
+	err = cmd.Run()
+    if err != nil {
+        log.Println(err.Error(), stderr.String())
+    } 
+	time.Sleep(5 * time.Second)
+	// log.Printf("Run %s output: %s\n", script, string(out))
+	log.Panicln("Sleep")
 
-	log.Printf("Run %s output: %s\n", script, string(out))
 	return
 }
 

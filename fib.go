@@ -1,4 +1,4 @@
-package demo
+package main
 
 func Fib(u uint) uint {
 	if u <= 1 {
