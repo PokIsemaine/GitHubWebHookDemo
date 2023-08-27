@@ -100,7 +100,11 @@ func main() {
 func runScript(scriptName string) (err error) {
 	script := "./scripts/" + scriptName
 	log.Println("script:", script)
+
 	cmd := exec.Command("bash", "-c", script)
+
+	cmd.Dir = "/home/GitHubWebHookDemo/repositories"
+
 	var out bytes.Buffer
 	var stderr bytes.Buffer
 	cmd.Stdout = &out
@@ -111,7 +115,7 @@ func runScript(scriptName string) (err error) {
     } 
 	time.Sleep(5 * time.Second)
 	// log.Printf("Run %s output: %s\n", script, string(out))
-	log.Panicln("Sleep")
+	log.Println("Sleep")
 
 	return
 }
