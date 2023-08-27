@@ -98,12 +98,10 @@ func main() {
 }
 
 func runScript(scriptName string) (err error) {
-	script := "./scripts/" + scriptName
+	script := "/home/GitHubWebHookDemo/repositories/scripts/" + scriptName
 	log.Println("script:", script)
 
 	cmd := exec.Command("bash", "-c", script)
-
-	cmd.Dir = "/home/GitHubWebHookDemo/repositories"
 
 	var out bytes.Buffer
 	var stderr bytes.Buffer
