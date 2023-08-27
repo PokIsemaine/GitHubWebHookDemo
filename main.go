@@ -14,9 +14,9 @@ import (
 
 const (
 	webhooksPath      = "/webhooks"
-	workDirectory     = "E:\\GoLandProject\\GitHubWebHookDemo\\repositories"
-	testDataDirectory = "E:\\GoLandProject\\GitHubWebHookDemo\\testdata"
-	configDirectory   = "E:\\GoLandProject\\GitHubWebHookDemo\\config"
+	workDirectory     = "./repositories"
+	testDataDirectory = "./testdata"
+	configDirectory   = "./config"
 )
 
 // CheckArgs should be used to ensure the right command line arguments are
@@ -59,6 +59,11 @@ func main() {
 	// 读取配置
 	// config := readConfig()
 
+	fmt.Println("Start")
+	fmt.Println(webhooksPath)
+	fmt.Println(workDirectory)
+	fmt.Println(configDirectory)
+
 	// hook, _ := github.New(github.Options.Secret("MyGitHubSuperSecretSecret...?"))
 	hook, err := github.New(github.Options.Secret(""))
 	if err != nil {
@@ -86,6 +91,7 @@ func main() {
 
 	err = http.ListenAndServe(":80", nil)
 	if err != nil {
+		panic(err)
 		return
 	}
 }
