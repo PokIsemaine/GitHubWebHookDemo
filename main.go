@@ -153,7 +153,7 @@ func gitClone(url string) {
 
 func benchMark() {
 	// 执行脚本运行 BenchMark
-	runScript("golang_bench_mark.sh")
+	runScript("golang_benchmark.sh")
 
 	// 解析 BenchMark
 
